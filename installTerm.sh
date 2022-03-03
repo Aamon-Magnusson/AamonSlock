@@ -7,6 +7,7 @@ read name
 if [ "$name" == "n" ] || [ "$name" == "N" ] || [ "$name" == "" ];then
 	echo "SLOCK install skipped!!!"
 	echo -e "Slock should be manually installed\n"
+	sleep 10
 else
 	sed -i "s/string/$name/g" config.h
 	sudo make -s clean install
