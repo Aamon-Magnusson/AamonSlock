@@ -15,28 +15,53 @@ helpMenu() {
 
 if [ -z $1 ];then
 	name=$(echo -e "aamonm" | dmenu -p "Enter your username:" -l 2 )
-	
 	group=$(echo -e "aamonm\nwheel" | dmenu -p "Enter your group name:" -l 3 )
+
+	color=$(echo -e "pink\ndracula\nwhite\nblue" | dmenu -p "What color scheme would you like dwm to follow?" -i )
+	[[ "$color" == "" ]] && color="pink"
 elif [ $1 == "-cli" ];then
 	echo -e "\nPlease enter your username:"
 	read name
-	
 	echo -e "\nPlease enter your group name:"
 	read group
+
+	echo "1) pink"
+	echo "2) dracula"
+	echo "3) white"
+	echo "4) blue"
+	echo "From the colors above select the number you would like to use."
+	read index
+	case $index in
+		1)
+			color="pink" ;;
+		2)
+			color="dracula" ;;
+		3)
+			color="white" ;;
+		4)
+			color="blue" ;;
+		*)
+			color="pink" ;;
+	esac
 elif [ $1 == "-h" ];then
 	helpMenu
+	exit 0
 else
 	helpMenu
+	exit 0
 fi
+
+ex=".h"
+header="$color$ex"
 
 if [ "$name" == "" ] || [ "$group" == "" ];then
 	fail
 else
 	sed -i "s/username/$name/g" config.h 
 	sed -i "s/groupname/$group/g" config.h
+	sed -i "s/pink.h/$header/g" config.h
 	sudo make -s clean install
 	sed -i "0,/$name/s//username/" config.h
 	sed -i "s/$group/groupname/g" config.h
+	sed -i "s/$header/pink.h/g" config.h
 fi
-
-
