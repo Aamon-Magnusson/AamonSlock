@@ -60,7 +60,7 @@ else
 	sed -i "s/username/$name/g" config.h 
 	sed -i "s/groupname/$group/g" config.h
 	sed -i "s/pink.h/$header/g" config.h
-	sudo make -s clean install
+	sudo make -s install clean 
 	sed -i "0,/$name/s//username/" config.h
 	sed -i "s/$group/groupname/g" config.h
 	sed -i "s/$header/pink.h/g" config.h
