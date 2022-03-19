@@ -47,8 +47,7 @@ elif [ $1 == "-h" ];then
 	helpMenu
 	exit 0
 else
-	helpMenu
-	exit 0
+	$color=$1
 fi
 
 ex=".h"
