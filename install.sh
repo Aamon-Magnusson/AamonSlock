@@ -47,6 +47,8 @@ elif [ $1 == "-h" ];then
 	helpMenu
 	exit 0
 else
+	name=$(echo -e "aamonm" | dmenu -p "Enter your username:" -l 2 )
+	group=$(echo -e "aamonm\nwheel" | dmenu -p "Enter your group name:" -l 3 )
 	color=$1
 fi
 
