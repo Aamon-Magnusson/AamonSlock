@@ -46,6 +46,13 @@ elif [ $1 == "-cli" ];then
 elif [ $1 == "-h" ];then
 	helpMenu
 	exit 0
+elif [ $2 == "-cli" ];then
+	echo -e "\nPlease enter your username:"
+	read name
+	echo -e "\nPlease enter your group name:"
+	read group
+	
+	color=$1
 else
 	name=$(echo -e "aamonm" | dmenu -p "Enter your username:" -l 2 )
 	group=$(echo -e "aamonm\nwheel" | dmenu -p "Enter your group name:" -l 3 )
