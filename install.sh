@@ -19,7 +19,7 @@ if [ -z $1 ];then
 
 	color=$(echo -e "pink\ndracula\nwhite\nblue" | dmenu -p "What color scheme would you like dwm to follow?" -i )
 	[[ "$color" == "" ]] && color="pink"
-elif [ $1 == "-cli" ];then
+elif [ "$1" == "-cli" ];then
 	echo -e "\nPlease enter your username:"
 	read name
 	echo -e "\nPlease enter your group name:"
@@ -43,10 +43,10 @@ elif [ $1 == "-cli" ];then
 		*)
 			color="pink" ;;
 	esac
-elif [ $1 == "-h" ];then
+elif [ "$1" == "-h" ];then
 	helpMenu
 	exit 0
-elif [ $2 == "-cli" ];then
+elif [ "$2" == "-cli" ];then
 	echo -e "\nPlease enter your username:"
 	read name
 	echo -e "\nPlease enter your group name:"
