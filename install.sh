@@ -51,7 +51,7 @@ elif [ "$2" == "-cli" ];then
 	read name
 	echo -e "\nPlease enter your group name:"
 	read group
-	
+
 	color=$1
 else
 	name=$(echo -e "aamonm" | dmenu -p "Enter your username:" -l 2 )
@@ -65,11 +65,16 @@ header="$color$ex"
 if [ "$name" == "" ] || [ "$group" == "" ];then
 	fail
 else
-	sed -i "s/username/$name/g" config.h 
+	sed -i "s/username/$name/g" config.h
 	sed -i "s/groupname/$group/g" config.h
-	sed -i "s/pink.h/$header/g" config.h
-	sudo make -s install clean 
+
+	cd colors
+	currentColor=$(awk 'NR==1{print $2}' current.h)
+	mv current.h $currentColor.h
+	mv $header current.h
+	cd ..
+
+	sudo make -s install clean
 	sed -i "0,/$name/s//username/" config.h
 	sed -i "s/$group/groupname/g" config.h
-	sed -i "s/$header/pink.h/g" config.h
 fi
