@@ -14,49 +14,31 @@ helpMenu() {
 }
 
 if [ -z $1 ];then
-	name=$(echo -e "aamonm" | dmenu -p "Enter your username:" -l 2 )
-	group=$(echo -e "aamonm\nwheel" | dmenu -p "Enter your group name:" -l 3 )
+	name=$(echo -e "aamonm" | fzf --height=10 --border=rounded --prompt=">" --header="Enter your username:" --header-first --reverse --print-query )
+	group=$(echo -e "aamonm\nwheel" | fzf --height=10 --border=rounded --prompt=">" --header="Enter your groupname:" --header-first --reverse --print-query )
 
-	color=$(echo -e "pink\ndracula\nwhite\nblue" | dmenu -p "What color scheme would you like dwm to follow?" -i )
+	color=$(echo -e "pink\ndracula\nwhite\nblue" | fzf --height=10 --border=rounded --prompt=">" --header="What colorscheme would you like Slock to follow?" --header-first --reverse )
 	[[ "$color" == "" ]] && color="pink"
-elif [ "$1" == "-cli" ];then
-	echo -e "\nPlease enter your username:"
-	read name
-	echo -e "\nPlease enter your group name:"
-	read group
-
-	echo "1) pink"
-	echo "2) dracula"
-	echo "3) white"
-	echo "4) blue"
-	echo "From the colors above select the number you would like to use."
-	read index
-	case $index in
-		1)
-			color="pink" ;;
-		2)
-			color="dracula" ;;
-		3)
-			color="white" ;;
-		4)
-			color="blue" ;;
-		*)
-			color="pink" ;;
-	esac
 elif [ "$1" == "-h" ];then
 	helpMenu
 	exit 0
-elif [ "$2" == "-cli" ];then
-	echo -e "\nPlease enter your username:"
-	read name
-	echo -e "\nPlease enter your group name:"
-	read group
+else
+	name=$(echo -e "aamonm" | fzf --height=10 --border=rounded --prompt=">" --header="Enter your username:" --header-first --reverse --print-query )
+	group=$(echo -e "aamonm\nwheel" | fzf --height=10 --border=rounded --prompt=">" --header="Enter your groupname:" --header-first --reverse --print-query )
 
 	color=$1
+fi
+
+if [ $(echo -e "$name" | awk 'FNR == 2 {print}') ]; then
+	name=$(echo -e "$name" | awk 'FNR == 2 {print}')
 else
-	name=$(echo -e "aamonm" | dmenu -p "Enter your username:" -l 2 )
-	group=$(echo -e "aamonm\nwheel" | dmenu -p "Enter your group name:" -l 3 )
-	color=$1
+	name=$(echo -e "$name" | awk 'FNR == 1 {print}')
+fi
+
+if [ $(echo -e "$group" | awk 'FNR == 2 {print}') ]; then
+	group=$(echo -e "$group" | awk 'FNR == 2 {print}')
+else
+	group=$(echo -e "$group" | awk 'FNR == 1 {print}')
 fi
 
 ex=".h"
