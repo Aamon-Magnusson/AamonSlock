@@ -9,7 +9,6 @@ helpMenu() {
 	echo "usage: ./install.sh [options]"
 	echo "options:"
 	echo -e "\tnone:\tStandard install prompt (dmenu)"
-	echo -e "\n-cli:\tCLI install"
 	echo -e "\t-h:\tThis help menu\n"
 }
 
